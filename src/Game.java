@@ -8,9 +8,9 @@ public class Game extends JFrame{
 
     private JFrame frame;
     private JPanel panel;
-    private JButton buttonCounter, buttonReset;
-    private JLabel labelCount;
-    //private JTextField textfield;
+    private JButton buttonCounter, buttonReset, buttonSubmit;
+    private JLabel labelCount, labelMessage;
+    private JTextField textfield;
 
     private int clicks = 0;
 
@@ -20,7 +20,7 @@ public class Game extends JFrame{
 
     public void gui (){
         frame = new JFrame("Test Window");
-        frame.setVisible(true);
+        
         frame.setSize(600,400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -53,14 +53,41 @@ public class Game extends JFrame{
                 }
             }  
         );
+
+        JLabel label = new JLabel("Enter your name: ");
+        panel.add(label);
+
+        textfield = new JTextField(12);
+        //textfield.setPreferredSize(new Dimension(150,30));
+        panel.add(textfield);
+
+        buttonSubmit = new JButton("Submit");
+        buttonSubmit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String name = textfield.getText();
+                if(name.isEmpty()){
+                    labelMessage.setText("Empty name, error!");
+                }
+                else{
+                    labelMessage.setText("Hello There, " + name + ". How are you?");
+                }
+            }
+        });
+        panel.add(buttonSubmit);
+
+        labelMessage = new JLabel("Please enter your name");
+        panel.add(labelMessage);
+
         /*textfield = new JTextField();
         textfield.setPreferredSize(new Dimension(200,15));*/
 
-        panel.add(buttonCounter);
-        panel.add(buttonReset);
-        panel.add(labelCount);
+        //panel.add(buttonCounter);
+        //panel.add(buttonReset);
+        //panel.add(labelCount);
         //panel.add(textfield);
         frame.add(panel);
+        frame.setVisible(true);
 
     }
 
